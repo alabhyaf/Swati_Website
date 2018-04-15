@@ -10,7 +10,7 @@ $.fn.exists = function () {
     return this.length > 0 ? this : false;
 };
 	//Handle window resize
-	var resizeFlag=0;  
+	var resizeFlag=0;
 	$(window).resize(function(){
 	    resizeFlag=1;
 	});
@@ -47,7 +47,7 @@ $(document).ready(function(){
 			$sideContent:$('#main-nav'),
 			$sidebarWrapper:$('#sidebar-wrapper'),
 			windowWidth:$(window).width()
-			
+
 		},
 
 		init : function(){
@@ -76,7 +76,7 @@ $(document).ready(function(){
 			});
 			sideS.$totaltrigger.click(function(){
 				if ($(window).width() < 960 && self.isIn())
-					self.sideOut(); 
+					self.sideOut();
 			});
 
 			sideS.$side.on('afterSlideIn',function(){
@@ -136,27 +136,27 @@ $(document).ready(function(){
 
 		gomobile : function (){
 			sideS.$main.css({left:0, right:0});
-			sideS.$side.css({left:0});	
+			sideS.$side.css({left:0});
 			sideS.$main.removeClass('sideIn');
 		},
 		setMobileSide:function(){
 			var self=this;
 
 			var tWidth=$(window).width();
-			
+
 			if (tWidth<600){
 				sideS.$side.width(tWidth);
 			}else{
 				sideS.$side.width('');
 				sideS.$main.css('display','block');
 			}
-			
+
 		},
 		setContentPadding:function(){
 			var self=this;
 			var footerHeight=sideS.$sideFooter.outerHeight();
 			sideS.$sideContent.css({paddingBottom:sideS.contentPadding+footerHeight});
-			
+
 		},
 		setScrollBar:function(){
 			var self=this;
@@ -166,7 +166,7 @@ $(document).ready(function(){
 			}else if(sideS.windowWidth<=1024 && isTouchSupported() && self.customScrollFlag){ // Condition that we don't want custom scrollbar
 				self.destroyCustomScroll();
 			}
-			
+
 		},
 		setCustomScroll:function(){
 
@@ -178,7 +178,7 @@ $(document).ready(function(){
 			    cursorborderradius:'0px',
 			    cursorcolor:"#aaa"
 			});
-		
+
 		},destroyCustomScroll:function(){
 			sideS.$sidebarWrapper.niceScroll('destroy');
 			this.customScrollFlag=false;
@@ -189,7 +189,7 @@ $(document).ready(function(){
 	sidebar.init();
 
 	/*++++++++++++++++++++++++++++++++++++
-		pages 
+		pages
 	++++++++++++++++++++++++++++++++++++++*/
 	var pager = {
 		pageContainer : $("div#main"),
@@ -201,7 +201,7 @@ $(document).ready(function(){
 
 			self = this;
 			self.menuItems.on('click','li:not(.external)', function(e){
-				
+
 				e.preventDefault();
 				var $li = $(this),
 					$target = $($li.children('a').attr('href')),
@@ -216,7 +216,7 @@ $(document).ready(function(){
 						break;
 					case "p3" :
 						if ( parseInt($target.attr('data-order')) === self.maxz() )
-						{	
+						{
 							// var $gotop2 = $target,
 							// 	$gotop1 = $secondary;
 							self.backward($target,$secondary);
@@ -240,19 +240,19 @@ $(document).ready(function(){
 		reset : function (){
 
 			this.overlay.hide();
-			
+
 			var $gotop1 = this.pages.not(".home");
 			$gotop1.attr('data-pos','p1').removeAttr('data-order');
 			TweenLite.to($gotop1,0.4,{left:"100%",zIndex:0, onComplete:function(){
-				$gotop1.removeClass('currentpage');	
+				$gotop1.removeClass('currentpage');
 			}});
 
 			this.hanndelMenu();
 		},
 
 		forward : function(gotop2 , /* optional */ gotop3){
-			
-			
+
+
 
 			self.hanndelMenu(gotop2);
 			self.overlay.show();
@@ -260,7 +260,7 @@ $(document).ready(function(){
 			gotop2.addClass('currentpage');
 			gotop2.attr('data-pos','p2').removeAttr('data-order');
 			gotop3.attr('data-pos','p3').attr('data-order',maxz+1);
-			
+
 
 			( new TimelineLite() )
 				.set(gotop2,{ left:"100%",zIndex:self.topz})
@@ -270,7 +270,7 @@ $(document).ready(function(){
 		},
 
 		backward : function (gotop2,gotop1){
-			
+
 
 			this.hanndelMenu(gotop2);
 			gotop2.exists() || this.overlay.hide();
@@ -292,7 +292,7 @@ $(document).ready(function(){
 		},
 
 		maxz : function(){
-			
+
 			var levelArray = this.pages.map( function() {
 			    return $(this).attr('data-order');
 			}).get();
@@ -301,14 +301,14 @@ $(document).ready(function(){
 		},
 
 		hanndelMenu : function(){
-			
+
 
 			var menuIndex = ( arguments.length ) ? ( (arguments[0].length) ? arguments[0].index() : 0 ):0;
 
 			this.menuItems.children().eq(menuIndex)
 				.addClass('currentmenu')
 				.siblings().removeClass('currentmenu');
-			
+
 
 		}
 	};
@@ -401,12 +401,12 @@ $(document).ready(function(){
 						$commingdetail = $("div#lab-details div").eq($comming.data('index')),
 						$goingdetail = $("div#lab-details div").eq($going.data('index'));
 
-					
+
 					$goingdetail.fadeOut(100,function(){
 						$goingdetail.siblings().hide();
 						$commingdetail.fadeIn(300);
 					});
-					
+
 
 					$comming.find('img').css('zIndex', 2).animate( selectedCss, aniOpts );
 					data.items.old.eq(1).find('img').css('zIndex', 1).animate( defaultCss, aniOpts );
@@ -437,13 +437,31 @@ $(document).ready(function(){
 		var anim = new TweenLite($(this).closest("li").find(".imageoverlay"),0.2,{left:"-102%"});
 	});
 
+  /*++++++++++++++++++++++++++++++++++++
+		ul-card details show/hide
+	++++++++++++++++++++++++++++++++++++++*/
+	$("ul.ul-card li").on('click',function(){
+		// $this = $(this);
+		$(this).find(".details")
+	        .stop(true, true)
+	        .animate({
+	            height:"toggle",
+	            opacity:"toggle"
+	        },300);
+	}).on('mouseenter',function(){
+		$this = $(this);
+		var anim = new TweenLite($(this).closest("li").find(".imageoverlay"),0.4,{left:0});
+	}).on('mouseleave', function(){
+		var anim = new TweenLite($(this).closest("li").find(".imageoverlay"),0.2,{left:"-102%"});
+	});
+
 
 
 	/*++++++++++++++++++++++++++++++++++++
 		Publications page categorization
 	++++++++++++++++++++++++++++++++++++++*/
-	
-	
+
+
 	$('div#pub-grid').mixitup({
 		layoutMode: 'list',
 		easing : 'snap',
@@ -452,9 +470,9 @@ $(document).ready(function(){
 			$(".tooltips").tooltip();
 		}
 	}).on('click','div.pubmain',function(){
-		var $this = $(this), 
+		var $this = $(this),
 			$item = $this.closest(".item");
-		
+
 		$item.find('div.pubdetails').slideToggle(function(){
 			$this.children("i").toggleClass('icon-collapse-alt icon-expand-alt');
 		},function(){
@@ -467,15 +485,15 @@ $(document).ready(function(){
 	} );
 
 	$("[name=cd-dropdown]").on("change",function(){
-		var item = this.value;		
+		var item = this.value;
 		$('div#pub-grid').mixitup('filter',item);
 	});
 
-	
+
 
 	/*++++++++++++++++++++++++++++++++++++
 		gallery overlays and popups
-	++++++++++++++++++++++++++++++++++++++*/ 
+	++++++++++++++++++++++++++++++++++++++*/
 
 	$(".grid").on("mouseenter","li",function(){
 		new TweenLite($(this).find(".over"),0.4,{bottom:0,top:0});
@@ -493,18 +511,18 @@ $(document).ready(function(){
 
 		closeBtnInside: true,
 		preloader: false,
-		
+
 		midClick: true,
 		removalDelay: 400,
 		mainClass: 'my-mfp-slide-bottom'
 	});
-	
+
 	/* Detect touch devices*/
 	function isTouchSupported(){
         //check if device supports touch
         var msTouchEnabled = window.navigator.msMaxTouchPoints;
         var generalTouchEnabled = "ontouchstart" in document.createElement("div");
-     
+
         if (msTouchEnabled || generalTouchEnabled) {
             return true;
         }
@@ -525,5 +543,5 @@ $(window).load(function(){
 	$container.masonry({
 	  itemSelector: 'li'
 	});
-	
+
 });

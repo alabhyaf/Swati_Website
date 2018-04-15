@@ -469,6 +469,7 @@ ul.ul-card li {
 	border-radius: 3px;
 	margin-left: 10px;
 	color: #333;
+	cursor:pointer;
 }
 
 ul.ul-card li .dy {
@@ -505,6 +506,12 @@ ul.ul-card li .description p {
 ul.ul-card li .description p.where {
 	font-weight: 300;
 	font-size: 14px;
+}
+
+ul.ul-card li .description p.details {
+	display: none;
+	font-weight: 300;
+	font-size: 13px;
 }
 
 /* ul-dates
@@ -701,9 +708,21 @@ ul.timeline li .data .text {
 	display: none;
 	padding: 20px;
 	background: #fff;
+	font-size: 13px;
 
 	-webkit-box-shadow: inset 0px 3px 5px -3px #ccc;
 	box-shadow: inset 0px 3px 5px -3px #ccc;
+}
+
+.ul-withdetails li .sub-heading {
+	font-size: 15px;
+	font-weight: 700;
+	text-decoration: underline;
+}
+
+.ul-withdetails li b {
+	font-size: 14px;
+	font-weight: 510;
 }
 
 /*************************************************
@@ -712,7 +731,7 @@ ul.timeline li .data .text {
 #labp-heads-wrap {
 	/*background-color: #03bb7a;*/
 	position: relative;
-	height: 180px; 
+	height: 180px;
 }
 
 #labp-heads-wrap:after {
@@ -1319,7 +1338,7 @@ ul.grid li a,ul.grid li img {
 
 /* fix for mobile view of pages */
 @media screen and (max-width: 770px) {
-	 
+
 	 #blog-content{
 	 	width:100% !important;
 	 }
@@ -1331,7 +1350,7 @@ ul.grid li a,ul.grid li img {
 	.headercontent .title{
 		font-size: 30px;
 	}
-	
+
 }
 
 }
